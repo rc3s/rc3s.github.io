@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Words | Richard Sidoli III</title>
+  <meta name="description" content="A list of words I keep: new ones I'm learning and ones I've kept.">
+  <link rel="stylesheet" href="../../css/tokens.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/words.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="site-name" href="../../index.html">Richard Sidoli III</a>
+      <nav aria-label="Main">
+        <ul class="site-nav">
+          <li><a href="../../index.html">Home</a></li>
+          <li><span class="soon">Work</span></li>
+          <li><span class="soon">About</span></li>
+          <li><span class="soon">Personal</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <h1>Words</h1>
+      <p class="lede">Words I'm collecting. Select a word to open it.</p>
+
+      <div id="words" data-src="../../data/words.csv">
+        <p id="words-status" role="status">Loading words&hellip;</p>
+        <div id="words-problems"></div>
+        <noscript><p>The word list needs JavaScript to display.</p></noscript>
+
+        <div id="words-app" hidden>
+          <div class="controls">
+            <label class="search">
+              <span class="sr-only">Search words and meanings</span>
+              <input type="search" id="q" placeholder="Search words and meanings" autocomplete="off">
+            </label>
+            <div class="chips" role="group" aria-label="Show">
+              <button type="button" class="btn" data-status="all" aria-pressed="true">All</button>
+              <button type="button" class="btn" data-status="new" aria-pressed="false">New</button>
+              <button type="button" class="btn" data-status="kept" aria-pressed="false">Kept</button>
+            </div>
+            <button type="button" class="btn" id="random">Random word</button>
+          </div>
+
+          <div id="letters" class="letters" role="group" aria-label="Filter by first letter"></div>
+
+          <div id="random-result" class="random" aria-live="polite"></div>
+
+          <section id="recent-section" aria-labelledby="recent-h">
+            <h2 id="recent-h">Recently added</h2>
+            <ul id="recent" class="word-list"></ul>
+          </section>
+
+          <section id="new-section" aria-labelledby="new-h">
+            <h2 id="new-h">New <span class="count" id="new-count"></span></h2>
+            <ul id="new-list" class="word-list"></ul>
+          </section>
+
+          <section id="kept-section" aria-labelledby="kept-h">
+            <h2 id="kept-h">Kept <span class="count" id="kept-count"></span></h2>
+            <div id="kept-groups"></div>
+          </section>
+
+          <p id="empty" hidden>No words match.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; 2026 Richard Sidoli III</p>
+    </div>
+  </footer>
+
+  <script src="../../js/words.js"></script>
+</body>
+</html>

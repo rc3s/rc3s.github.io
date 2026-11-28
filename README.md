@@ -16,7 +16,7 @@ It is plain HTML, CSS and a little JavaScript. There is no build step: whatever 
 
 | Folder | What lives there |
 | --- | --- |
-| `css/` | `tokens.css` (colours, type, spacing) and `base.css` (page layout) |
+| `css/` | `tokens.css` (colours, type, spacing), `base.css` (page layout) and one stylesheet per page, like `words.css` |
 | `js/` | Scripts for the interactive pages |
 | `data/` | The lists the site reads: words, restaurants, commonplace book |
 | `work/` | Case-study pages |
@@ -27,17 +27,31 @@ Links between pages are relative, so the site keeps working if the repo is renam
 
 ## Editing a list
 
-Lists are plain data files in `data/`, read by their page. The Words page will use `data/words.csv` (added in the next pull request). To add a word you will add one row at the bottom of that file.
+Lists are plain data files in `data/`, read by their page. The Words page reads `data/words.csv`, one word per row, with these columns:
+
+| Column | What goes in it |
+| --- | --- |
+| `word` | The word |
+| `status` | `new` (still learning) or `kept` |
+| `meaning` | Short meaning (optional, fine to leave blank for now) |
+| `why` | One line on why it's on the list (optional) |
+| `where_found` | Where you came across it (optional) |
+| `date_added` | `YYYY-MM-DD`, or `legacy` for words from before dates were tracked |
+| `date_kept` | `YYYY-MM-DD` when it moved to kept (optional) |
+| `note` | Anything else (optional) |
+
+To add a word, add one row at the bottom of the file. A later row counts as newer, which is how the Recently added list is ordered.
 
 Rules for CSV rows, because one slip shifts every column after it:
 
-- Wrap the **meaning** and **note** fields in double quotes, since they often contain commas.
+- Always keep all 8 columns, even when some are empty: `Quay,new,"A landing place by the water.",,,2026-12-01,,`
+- Wrap the **meaning**, **why**, **where_found** and **note** fields in double quotes, since they often contain commas.
 - If a quoted field itself needs a double quote, write it twice: `"he said ""no"""`.
-- Dates are `YYYY-MM-DD`.
-- One word per line, no blank lines in the middle.
+- Dates are `YYYY-MM-DD`. New words get the real date.
+- Blank lines are ignored.
 
-The page flags any row it can't read instead of failing, so a typo shows up as a message naming the bad row.
+The page shows a message naming the line of any row it can't read, and still shows the rest of the list.
 
 ## Status
 
-Skeleton only: placeholder home page, 404 page, and the base styles. Next up is the Words page.
+Skeleton plus the Words page (`personal/words/`), currently showing a small sample list. Next up is moving the full word list into `data/words.csv`.
